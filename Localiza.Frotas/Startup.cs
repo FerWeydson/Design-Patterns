@@ -1,3 +1,5 @@
+using Localiza.Frotas.Domain;
+using Localiza.Frotas.infra.Repository;
 using Localiza.Frotas.infra.Singleton;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -41,6 +43,9 @@ namespace Localiza.Frotas
                 c.IncludeXmlComments(apiPath);
             });
             services.AddSingleton<SingletonContainer>();
+
+            // Injeção de dependencia 
+            services.AddSingleton<IVeiculoRepository, InMemoryRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

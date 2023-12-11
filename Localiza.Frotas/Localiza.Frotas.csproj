@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Localiza.Frotas.Domain\Localiza.Frotas.Domain.csproj" />
     <ProjectReference Include="..\Localiza.Frotas.infra\Localiza.Frotas.infra.csproj" />
   </ItemGroup>
 

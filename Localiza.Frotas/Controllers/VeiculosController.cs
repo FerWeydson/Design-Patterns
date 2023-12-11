@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Text.RegularExpressions;
 using System.Threading;
 
 namespace Localiza.Frotas.Controllers
@@ -11,9 +12,12 @@ namespace Localiza.Frotas.Controllers
     public class VeiculosController : ControllerBase
     {
         private readonly IVeiculoRepository veiculoRepository;
-        public VeiculosController(IVeiculoRepository veiculoRepository)
+        private readonly IVeiculoDetran veiculoDetran;
+
+        public VeiculosController(IVeiculoRepository veiculoRepository, IVeiculoDetran veiculoDetran)
         {
             this.veiculoRepository = veiculoRepository;
+            this.veiculoDetran = veiculoDetran;
         }
         [HttpGet]
         public IActionResult Get() => Ok(veiculoRepository.GetAll());
@@ -50,6 +54,13 @@ namespace Localiza.Frotas.Controllers
             return NoContent();
 
         }
-        
+
+        [HttpPut("{id}/vistoria")]
+        public IActionResult Put(Guid id)
+        {
+            veiculoDetran.AgendarVistoriaDetran(id);
+
+            return NoContent();
+        }
     }
 }

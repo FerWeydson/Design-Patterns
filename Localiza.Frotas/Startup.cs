@@ -1,6 +1,8 @@
 using Localiza.Frotas.Domain;
+using Localiza.Frotas.infra.Facade;
 using Localiza.Frotas.infra.Repository;
 using Localiza.Frotas.infra.Singleton;
+using Localiza.Frotas.Infra.Facade;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -46,6 +48,10 @@ namespace Localiza.Frotas
 
             // Injeção de dependencia 
             services.AddSingleton<IVeiculoRepository, InMemoryRepository>();
+
+            services.AddTransient<IVeiculoDetran, VeiculoDetranFacade>();
+            services.Configure<DetranOptions>(Configuration.GetSection("DetranOptions"));
+            services.AddHttpClient();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

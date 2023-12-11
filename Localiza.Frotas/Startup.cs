@@ -1,3 +1,4 @@
+using Localiza.Frotas.infra.Singleton;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -39,6 +40,7 @@ namespace Localiza.Frotas
                 var apiPath = Path.Combine(AppContext.BaseDirectory, "Localiza.Frotas.XML");
                 c.IncludeXmlComments(apiPath);
             });
+            services.AddSingleton<SingletonContainer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,11 +50,13 @@ namespace Localiza.Frotas
             {
                 app.UseDeveloperExceptionPage();
             }
+
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "API Localiza.Frotas");
             });
+
             app.UseHttpsRedirection();
 
             app.UseRouting();

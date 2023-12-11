@@ -8,11 +8,20 @@ namespace Localiza.Frotas.Controllers
     [ApiController]
     public class SingletonController : ControllerBase
     {
+        private readonly SingletonContainer singletonContainer;
+
+        public SingletonController(SingletonContainer singletonContainer)
+        {
+            this.singletonContainer = singletonContainer;
+        }
+
         [HttpGet()]
         public IActionResult Get()
         {
-            var singleton = new Singleton();
-            return Ok(singleton);
+            // var singleton = singletonContainer;
+            return Ok(singletonContainer);
+
+
         }
     }
 }
